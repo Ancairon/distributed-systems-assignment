@@ -26,6 +26,12 @@ public class Pet {
 
     }
 
+    public Pet(String labrador_retriever, char m, LocalDate of) {
+        this.race = labrador_retriever;
+        this.sex = m;
+        this.birthday = of;
+    }
+
 
     public String getRace() {
         return race;
