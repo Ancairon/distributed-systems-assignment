@@ -17,20 +17,22 @@ public class PetController {
     }
 
     @GetMapping(path = "/pets/list")
-    public List<Pet> getPet(){
+    public List<Pet> getPet() {
         return petService.listAllPets();
     }
+
     @PostMapping(path = "/pets/new")
-    public void newPet(@RequestBody Pet pet){
+    public void newPet(@RequestBody Pet pet) {
         petService.newPet(pet);
     }
+
     @DeleteMapping(path = "/pets/delete/{serialNumber}")
-    public void deletePet(@PathVariable("serialNumber") int serialNumber){
+    public void deletePet(@PathVariable("serialNumber") int serialNumber) {
         petService.deletePet(serialNumber);
     }
 
     @PutMapping(path = "/pets/modify/{serialNumber}")
-    public void modifyPet(@PathVariable("serialNumber") int serialNumber, @RequestParam(required = false) String race, @RequestParam(required = false) char sex){
+    public void modifyPet(@PathVariable("serialNumber") int serialNumber, @RequestParam(required = false) String race, @RequestParam(required = false) char sex) {
         petService.updatePet(serialNumber, race, sex);
     }
 }

@@ -18,21 +18,22 @@ public class PetService {
         this.petRepository = petRepository;
     }
 
-    public List<Pet> listAllPets(){
+    public List<Pet> listAllPets() {
         return petRepository.findAll();
     }
 
     public void newPet(Pet pet) {
         petRepository.save(pet);
     }
-    public void deletePet(int serialNumber){
+
+    public void deletePet(int serialNumber) {
         petRepository.deleteById(serialNumber);
     }
 
     @Transactional
     public void updatePet(int serialNumber, String race, char sex) {
         Optional<Pet> pet = petRepository.findById(serialNumber);
-        if(pet.isPresent()){
+        if (pet.isPresent()) {
             Pet thePet = pet.get();
             thePet.setRace(race);
             thePet.setSex(sex);
