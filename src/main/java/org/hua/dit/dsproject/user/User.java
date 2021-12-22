@@ -2,15 +2,17 @@ package org.hua.dit.dsproject.user;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "USER")
 @Table
 public class User {
     @Id
+    @Column(name = "ID")
     @SequenceGenerator(name = "user_sequence", sequenceName = "user_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
     private int id;
-
+    @Column(name = "USERNAME", updatable = false)
     private String username;
+    @Column(name = "PASSWORD")
     private String password;
 
     public User(int id, String username, String password) {

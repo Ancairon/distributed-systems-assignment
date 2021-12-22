@@ -3,24 +3,21 @@ package org.hua.dit.dsproject.pet;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
+@Entity(name = "PET")
 @Table
 public class Pet {
     @Id
+    @Column( name = "SERIAL_NUMBER")
     @SequenceGenerator(name = "pet_sequence", sequenceName = "pet_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pet_sequence")
     private int serialNumber;
-
+    @Column( name = "RACE")
     private String race;
+    @Column( name = "SEX")
     private char sex;
+    @Column( name = "BIRTHDAY")
     private LocalDate birthday;
 
-    public Pet(String race, char sex, LocalDate birthday, int serialNumber) {
-        this.race = race;
-        this.sex = sex;
-        this.birthday = birthday;
-        this.serialNumber = serialNumber;
-    }
 
     public Pet() {
 
