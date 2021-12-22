@@ -10,7 +10,7 @@ public class User {
     @SequenceGenerator(name = "user_sequence", sequenceName = "user_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
     private int id;
-    @Column(name = "USERNAME", updatable = false)
+    @Column(name = "USERNAME", unique = true)
     private String username;
     @Column(name = "PASSWORD")
     private String password;
