@@ -13,7 +13,7 @@ public class PetConfig {
     @Bean
     CommandLineRunner commandLineRunner(PetRepository petRepository) {
         return args -> {
-            Pet mydog = new Pet("Labrador Retriever", 'M', LocalDate.of(2010, 9, 8));
+            Pet mydog = new Pet("Labrador Retriever", 'M', LocalDate.of(2010, 9, 8), "ABC123");
 
             petRepository.saveAll(List.of(mydog));
         };
