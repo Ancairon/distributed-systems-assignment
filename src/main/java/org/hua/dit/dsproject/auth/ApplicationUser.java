@@ -1,63 +1,62 @@
 package org.hua.dit.dsproject.auth;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-import java.util.Collection;
-import java.util.Set;
-
-public class ApplicationUser implements UserDetails {
-
-    private Set<? extends GrantedAuthority>  grantedAuthorities;
+@Entity
+@Table(name = "user")
+public class ApplicationUser {
+    @Id
+    @Column(name = "idNumber")
+    private String idNumber;
+    @Column(name = "userName")
+    private String userName;
+    @Column(name = "password")
     private String password;
-    private String username;
-    private boolean isAccountNonLocked;
-    private boolean isAccountNonExpired;
-    private boolean isCredentialsNonExpired;
-    private boolean isEnabled;
+    @Column(name = "active")
+    private boolean active;
+    @Column(name = "role")
+    private String role;
 
-    public ApplicationUser(String username, String password, Set<? extends GrantedAuthority> grantedAuthorities, boolean isAccountNonLocked, boolean isAccountNonExpired, boolean isCredentialsNonExpired, boolean isEnabled) {
-        this.grantedAuthorities = grantedAuthorities;
-        this.password = password;
-        this.username = username;
-        this.isAccountNonLocked = isAccountNonLocked;
-        this.isAccountNonExpired = isAccountNonExpired;
-        this.isCredentialsNonExpired = isCredentialsNonExpired;
-        this.isEnabled = isEnabled;
+    public String getIdNumber() {
+        return idNumber;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return grantedAuthorities;
+    public void setIdNumber(String idNumber) {
+        this.idNumber = idNumber;
     }
 
-    @Override
+    public String getUsername() {
+        return userName;
+    }
+
+    public void setUsername(String username) {
+        this.userName = username;
+    }
+
     public String getPassword() {
         return password;
     }
 
-    @Override
-    public String getUsername() {
-        return username;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return isAccountNonExpired;
+    public boolean isActive() {
+        return active;
     }
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return isAccountNonLocked;
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return isCredentialsNonExpired;
+    public String getRole() {
+        return role;
     }
 
-    @Override
-    public boolean isEnabled() {
-        return isEnabled;
+    public void setRole(String role) {
+        this.role = role;
     }
 }

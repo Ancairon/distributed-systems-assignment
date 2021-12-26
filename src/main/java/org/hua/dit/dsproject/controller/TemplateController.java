@@ -17,4 +17,9 @@ public class TemplateController {
     public String getVetView(){
         return "vet";
     }
+
+    @GetMapping("citizen")
+    public String getCitizenView(){
+        return "citizen";
+    }
 }
