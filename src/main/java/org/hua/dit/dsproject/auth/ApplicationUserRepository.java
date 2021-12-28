@@ -5,7 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+//Define our repository
 @Repository
-public interface ApplicationUserRepository extends JpaRepository<ApplicationUser, String > {
+public interface ApplicationUserRepository extends JpaRepository<ApplicationUser, String> {
     Optional<ApplicationUser> findByUserName(String username);
 }

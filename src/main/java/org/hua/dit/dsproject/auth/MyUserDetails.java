@@ -7,11 +7,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class MyUserDetails implements UserDetails {
 
+    //User credentials, this will be populated by the ApplicationUser class, coming from the db
     public String idNumber;
     public String userName;
     public String password;
@@ -19,11 +19,11 @@ public class MyUserDetails implements UserDetails {
     public List<SimpleGrantedAuthority> grantedAuthorities;
 
 
-
+    //Constructors
     public MyUserDetails() {
     }
 
-    public MyUserDetails(ApplicationUser applicationUser){
+    public MyUserDetails(ApplicationUser applicationUser) {
         this.idNumber = applicationUser.getIdNumber();
         this.userName = applicationUser.getUsername();
         this.password = applicationUser.getPassword();
@@ -32,6 +32,7 @@ public class MyUserDetails implements UserDetails {
 
     }
 
+    //Getters and Setters
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return grantedAuthorities;
