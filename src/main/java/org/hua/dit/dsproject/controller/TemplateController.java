@@ -30,20 +30,25 @@ public class TemplateController {
     }
 
     @GetMapping("admin")
-    public String getAdminView(){
+    public String getAdminView() {
         return "admin";
     }
 
+    //A template where we redirect based on the role
     @RequestMapping("/success")
     public void loginPageRedirect(HttpServletRequest request, HttpServletResponse response, Authentication authResult) throws IOException, ServletException {
 
-        String role =  authResult.getAuthorities().toString();
+        String role = authResult.getAuthorities().toString();
 
-        if(role.contains("ROLE_ADMIN")){
+        if (role.contains("ROLE_ADMIN")) {
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/admin"));
-        }
-        else if(role.contains("ROLE_CITIZEN")) {
+        } else if (role.contains("ROLE_CITIZEN")) {
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/citizen"));
+        } else if (role.contains("ROLE_VET")) {
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/vet"));
+        } else if (role.contains("ROLE_EMPLOYEE")) {
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/employee"));
         }
+
     }
 }
