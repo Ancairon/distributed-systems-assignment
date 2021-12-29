@@ -7,19 +7,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/")
 public class TemplateController {
-
+    //Here we map each of the locations of the site, to their corresponding html file.
     @GetMapping("login")
-    public String getLoginView(){
+    public String getLoginView() {
         return "login";
     }
 
     @GetMapping("vet")
-    public String getVetView(){
+    public String getVetView() {
         return "vet";
     }
 
     @GetMapping("citizen")
-    public String getCitizenView(){
+    public String getCitizenView() {
         return "citizen";
     }
 }
