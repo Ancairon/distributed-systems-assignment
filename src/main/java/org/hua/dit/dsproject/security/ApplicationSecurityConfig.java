@@ -17,37 +17,32 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
-
     @Autowired
     private final UserDetailsService userDetailsService;
     @Autowired
     private final PasswordEncoder passwordEncoder;
 
-
-
     @Autowired
-    public ApplicationSecurityConfig(DataSource dataSource, UserDetailsService userDetailsService, PasswordEncoder passwordEncoder){
+    public ApplicationSecurityConfig(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
         this.userDetailsService = userDetailsService;
         this.passwordEncoder = passwordEncoder;
     }
 
-
-   @Override
+    //Here we set the permitions, for the default pages we permitAll, for someone to see the pets, we need him to be at
+    // least a citizen. (CITIZEN < VET / EMPLOYEE < ADMIN)
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-       http
-               .csrf().disable()
-               .authorizeRequests()
-               .antMatchers("/","index","/css/*","/js/*").permitAll()
-               .antMatchers("/pets/**").hasRole("CITIZEN")
-               .anyRequest()
-               .authenticated()
-               .and()
-               .formLogin();
+        http
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/", "index", "/css/*", "/js/*").permitAll()
+                .antMatchers("/pets/**").hasRole("CITIZEN")
+                .anyRequest()
+                .authenticated()
+                .and()
+                .formLogin();
     }
-
-
-
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -58,7 +53,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public PasswordEncoder getPasswordEncoder(){
+    public PasswordEncoder getPasswordEncoder() {
         return NoOpPasswordEncoder.getInstance();
     }
 

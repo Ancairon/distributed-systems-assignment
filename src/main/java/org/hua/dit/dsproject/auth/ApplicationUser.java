@@ -8,6 +8,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "user")
 public class ApplicationUser {
+
+    //The class that will be saved on the db as a row of a table
     @Id
     @Column(name = "idNumber")
     private String idNumber;

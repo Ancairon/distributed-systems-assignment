@@ -11,8 +11,10 @@ import java.util.Optional;
 @Service
 public class MyUserDetailsService implements UserDetailsService {
 
+    //The service contains a repo and it can load a user by its username, returning a MyUserDetails object
     @Autowired
     ApplicationUserRepository applicationUserRepository;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<ApplicationUser> applicationUser = applicationUserRepository.findByUserName(username);
