@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
 import javax.sql.DataSource;
 
@@ -28,20 +30,22 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         this.passwordEncoder = passwordEncoder;
     }
 
-    //Here we set the permitions, for the default pages we permitAll, for someone to see the pets, we need him to be at
-    // least a citizen. (CITIZEN < VET / EMPLOYEE < ADMIN)
+    //Here we set the permitions, for the default pages we permitAll, for someone to see the pets
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(final HttpSecurity http) throws Exception {
 
         http
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "index", "/css/*", "/js/*").permitAll()
                 .antMatchers("/pets/**").hasRole("CITIZEN")
+                .antMatchers("/pets/**").hasRole("VET")
+                .antMatchers("/pets/**").hasRole("EMPLOYEE")
                 .anyRequest()
                 .authenticated()
                 .and()
-                .formLogin();
+                .formLogin()
+                .defaultSuccessUrl("/success", true);
     }
 
     @Override

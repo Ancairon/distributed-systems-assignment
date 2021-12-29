@@ -9,7 +9,7 @@ import java.util.List;
 
 @Configuration
 public class PetConfig {
-
+/*
     @Bean
     CommandLineRunner commandLineRunner(PetRepository petRepository) {
         return args -> {
@@ -19,4 +19,6 @@ public class PetConfig {
         };
 
     }
+    
+ */
 }
