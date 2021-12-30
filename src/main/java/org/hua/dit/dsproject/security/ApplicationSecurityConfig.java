@@ -37,15 +37,18 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "index", "/css/*", "/js/*").permitAll()
+                .antMatchers("/", "index", "/css/*", "/js/*", "/register").permitAll()
                 .antMatchers("/pets/**").hasRole("CITIZEN")
                 .antMatchers("/pets/**").hasRole("VET")
                 .antMatchers("/pets/**").hasRole("EMPLOYEE")
+                .antMatchers("/users/**").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
-                .defaultSuccessUrl("/success", true);
+                .defaultSuccessUrl("/success", true)
+                .loginPage("/login").permitAll()
+        ;
     }
 
     @Override

@@ -34,6 +34,9 @@ public class TemplateController {
         return "admin";
     }
 
+    @GetMapping("register")
+    public String getRegisterView() { return "register"; }
+
     //A template where we redirect based on the role
     @RequestMapping("/success")
     public void loginPageRedirect(HttpServletRequest request, HttpServletResponse response, Authentication authResult) throws IOException, ServletException {
