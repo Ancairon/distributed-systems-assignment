@@ -37,6 +37,11 @@ public class TemplateController {
     @GetMapping("register")
     public String getRegisterView() { return "register"; }
 
+    @GetMapping("modify")
+    public String getModifyView() { return "modify"; }
+
+    @GetMapping("delete")
+    public String getDeleteView() { return "delete"; }
     //A template where we redirect based on the role
     @RequestMapping("/success")
     public void loginPageRedirect(HttpServletRequest request, HttpServletResponse response, Authentication authResult) throws IOException, ServletException {

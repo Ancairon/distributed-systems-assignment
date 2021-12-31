@@ -28,4 +28,15 @@ public class UserController {
         userDetailsService.newUser(user);
     }
 
+    @PostMapping(path = "/users/modify")
+    public void modifyUser(@RequestBody User user) {
+        userDetailsService.userRepository.deleteById(user.getIdNumber());
+        userDetailsService.newUser(user);
+    }
+
+    @PostMapping(path = "/users/delete")
+    public void deleteUser(@RequestBody User user) {
+        userDetailsService.userRepository.deleteById(user.getIdNumber());
+    }
+
 }

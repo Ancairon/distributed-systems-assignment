@@ -25,17 +25,22 @@
             <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
         </p>
         <p>
-            <label for="password" class="sr-only">ID Number</label>
-            <input type="password" id="id_number" name="ID Number" class="form-control" placeholder="Id Number"
+            <label for="id_number" class="sr-only">ID Number</label>
+            <input type="text" id="id_number" name="ID Number" class="form-control" placeholder="Id Number"
                    required>
         </p>
         <label for="role">Role Request</label>
         <select name="role" id="role">
-            <option value="Citizen">Citizen</option>
-            <option value="Vet">Vet</option>
-            <option value="Employee">Employee</option>
+            <option value="ROLE_CITIZEN">Citizen</option>
+            <option value="ROLE_VET">Vet</option>
+            <option value="ROLE_EMPLOYEE">Employee</option>
         </select>
         <button class="btn btn-lg btn-primary btn-block" id="sendRequest" type="submit">Sign in</button>
+    </form>
+
+
+    <form class="form-signin" method="get" action="/admin">
+        <button class="btn btn-lg btn-secondary btn-block" type="submit">Back</button>
     </form>
 </div>
 
@@ -51,9 +56,9 @@
             const user = {
                 'idNumber': document.getElementById('id_number').value,
                 'password': document.getElementById('password').value,
-                'active': false,
+                'active': true,
                 'role': document.getElementById('role').value,
-                'userName': document.getElementById('username').value
+                'username': document.getElementById('username').value
 
 
             };
