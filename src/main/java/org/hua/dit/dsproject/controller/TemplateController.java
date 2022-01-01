@@ -14,6 +14,13 @@ import java.io.IOException;
 @RequestMapping("/")
 public class TemplateController {
     //Here we map each of the locations of the site, to their corresponding html file.
+
+
+    @GetMapping(path = "modifyPet")
+    public String getmodifyView() {
+        return "modifyPet";
+    }
+
     @GetMapping("login")
     public String getLoginView() {
         return "login";
@@ -29,22 +36,38 @@ public class TemplateController {
         return "citizen";
     }
 
+
+    @GetMapping("employee")
+    public String getEmployeeView() {
+        return "employee";
+    }
+
+
     @GetMapping("admin")
     public String getAdminView() {
         return "admin";
     }
 
     @GetMapping("register")
-    public String getRegisterView() { return "register"; }
+    public String getRegisterView() {
+        return "register";
+    }
 
     @GetMapping("newpet")
-    public String getNewPetView() { return "newpet"; }
+    public String getNewPetView() {
+        return "newpet";
+    }
 
     @GetMapping("modify")
-    public String getModifyView() { return "modify"; }
+    public String getModifyView() {
+        return "modify";
+    }
 
     @GetMapping("delete")
-    public String getDeleteView() { return "delete"; }
+    public String getDeleteView() {
+        return "delete";
+    }
+
     //A template where we redirect based on the role
     @RequestMapping("/success")
     public void loginPageRedirect(HttpServletRequest request, HttpServletResponse response, Authentication authResult) throws IOException {

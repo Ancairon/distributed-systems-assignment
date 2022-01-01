@@ -3,9 +3,8 @@ package org.hua.dit.dsproject.pet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -22,18 +21,27 @@ public class PetController {
         return petService.listAllPets();
     }
 
+
+
     @PostMapping(path = "/pets/new")
     public void newPet(@RequestBody Pet pet) {
         petService.newPet(pet);
     }
 
+    @PostMapping(path = "/vet/modify")
+    public void modifyPet(@RequestBody Pet pet) {
+        petService.deletePet(pet.getSerialNumber());
+        petService.newPet(pet);
+    }
+
+    @GetMapping(path = "/findPet/{serialNumber}")
+    public Optional<Pet> getPet(@PathVariable("serialNumber") int serialNumber) {
+        return petService.findPet(serialNumber);
+    }
+
+
     @DeleteMapping(path = "/pets/delete/{serialNumber}")
     public void deletePet(@PathVariable("serialNumber") int serialNumber) {
         petService.deletePet(serialNumber);
-    }
-
-    @PutMapping(path = "/pets/modify/{serialNumber}")
-    public void modifyPet(@PathVariable("serialNumber") int serialNumber, @RequestParam(required = false) String race, @RequestParam(required = false) char sex) {
-        petService.updatePet(serialNumber, race, sex);
     }
 }

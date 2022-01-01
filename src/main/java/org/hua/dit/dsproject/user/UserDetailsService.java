@@ -2,6 +2,8 @@ package org.hua.dit.dsproject.user;
 
 import org.hua.dit.dsproject.pet.Pet;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 

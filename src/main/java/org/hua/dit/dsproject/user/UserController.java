@@ -1,12 +1,11 @@
 package org.hua.dit.dsproject.user;
 
+import org.hua.dit.dsproject.pet.Pet;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class UserController {
@@ -37,5 +36,10 @@ public class UserController {
     @PostMapping(path = "/users/delete")
     public void deleteUser(@RequestBody User user) {
         userDetailsService.userRepository.deleteById(user.getIdNumber());
+    }
+
+    @GetMapping(path = "/findPetsFromOwner/{ownerID}")
+    public List<Pet> getPetsFromOwner(@PathVariable("ownerID") String ownerID) {
+        return userDetailsService.userRepository.findPets(ownerID);
     }
 }

@@ -39,9 +39,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "index", "/css/*", "/js/*", "/register").permitAll()
                 .antMatchers("/pets/list","pets/new","/newpet").hasRole("CITIZEN")
-
-              //  .antMatchers("/pets/**").hasRole("VET")
-             //   .antMatchers("/pets/**").hasRole("EMPLOYEE")
+                .antMatchers("/vet/modifyPet").hasRole("VET")
+                .antMatchers("findPet/{serialNumber}").hasAnyRole("VET", "EMPLOYEE")
                 .antMatchers("/users/**").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
