@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Please sign in</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
+</head>
+<body>
+<div class="container">
+    <form class="form-signin">
+        <h2 class="form-signin-heading">Please enter the pet's credentials</h2>
+        <p>
+            <label for="serialNumber" class="sr-only">Serial Number</label>
+            <input type="text" id="serialNumber" class="form-control" placeholder="Serial Number"
+                   required
+                   autofocus>
+        </p>
+        <p>
+            <label for="race" class="sr-only">Race</label>
+            <input type="text" id="race" class="form-control" placeholder="Race" required
+                   autofocus>
+        </p>
+        <p>
+            <label for="sex" class="sr-only">Genre</label>
+            <input type="text" id="sex" class="form-control" placeholder="Genre" required>
+        </p>
+        <p>
+            <label for="birthday" class="sr-only">Birthday</label>
+            <input type="text" id="birthday" class="form-control" placeholder="Birthday"
+                   required>
+        </p>
+        <p>
+            <label for="ownerID" class="sr-only">Owner ID</label>
+            <input type="text" id="ownerID" class="form-control" placeholder="Owner ID"
+                   required>
+        </p>
+
+        <button class="btn btn-lg btn-primary btn-block" id="sendRequest" type="submit">Add Pet</button>
+    </form>
+
+
+    <form class="form-signin" method="get" action="/citizen">
+        <button class="btn btn-lg btn-secondary btn-block" type="submit">Back</button>
+    </form>
+</div>
+
+</body>
+</html>
+
+<script>
+
+
+    window.addEventListener('load', (event) => {
+        document.getElementById('sendRequest').addEventListener('click', (event) => {
+
+            const pet = {
+                'serialNumber': document.getElementById('serialNumber').value,
+                'race': document.getElementById('race').value,
+                'sex': document.getElementById('sex').value,
+                'birthday': document.getElementById('birthday').value,
+                'ownerID': document.getElementById('ownerID').value
+            };
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://localhost:8080/pets/new', true);
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.send(JSON.stringify(pet));
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        alert("registered!");
+                    }
+                }
+            };
+
+        });
+    });
+
+</script>

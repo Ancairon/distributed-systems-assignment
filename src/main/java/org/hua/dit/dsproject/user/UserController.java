@@ -38,5 +38,4 @@ public class UserController {
     public void deleteUser(@RequestBody User user) {
         userDetailsService.userRepository.deleteById(user.getIdNumber());
     }
-
 }

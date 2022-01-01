@@ -19,6 +19,6 @@ public class PetConfig {
         };
 
     }
-    
+    [{"serialNumber":1234,"race":"some race","sex":"F","birthday":"2012-12-12","ownerID":"AM092093"}]
  */
 }
