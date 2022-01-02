@@ -1,7 +1,5 @@
 <html lang="en">
 <head>
-
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -23,16 +21,20 @@
     </style>
 </head>
 <body>
-<h1>Employee Page</h1>
+
 
 <div class="container">
+    <h1>Employee Page</h1>
+    <!--Employee's options after he logs in-->
+
     <p>
         <label for="serialNumber" class="sr-only"></label>
         <input type="text" id="serialNumber" class="form-control" placeholder="Serial Number"
-              >
+        >
     </p>
 
-    <button class="btn btn-lg btn-primary btn-block" id="serialIDSearch" type="submit">Search By Pet's serial ID</button>
+    <button class="btn btn-lg btn-primary btn-block" id="serialIDSearch" type="submit">Search By Pet's serial ID
+    </button>
 
     <br>
     <br>
@@ -40,7 +42,7 @@
     <p>
         <label for="ownerID" class="sr-only"></label>
         <input type="text" id="ownerID" class="form-control" placeholder="Serial Number"
-               >
+        >
     </p>
 
 
@@ -61,7 +63,7 @@
     //SEARCH PETS
     window.addEventListener('load', (event) => {
         document.getElementById('serialIDSearch').addEventListener('click', (event) => {
-            tableElem.innerHTML = ``;
+
             const xhr = new XMLHttpRequest();
             xhr.open('GET', `http://localhost:8080/findPet/${document.getElementById('serialNumber').value}`, true);
             xhr.send();
@@ -69,9 +71,14 @@
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
                         const results = JSON.parse(xhr.responseText);
-                        //const results = xhr.responseText;
 
-                        //alert('found!!');
+                        if (xhr.responseText.length === 4) {
+                            alert("No results")
+                            return;
+                        }
+
+                        tableElem.innerHTML = ``;
+
                         tableElem.style.display = "block";
                         tableElem.style.alignItems = "center";
                         tableElem.innerHTML +=
@@ -91,8 +98,6 @@
                             "<td >" + `${results.birthday}` + "</td>" +
                             "<td >" + `${results.ownerID}` + "</td>"
                             + "</tr>";
-
-                        //} else alert('No results! Please try again!!');
                     }
                 }
             };
@@ -102,7 +107,7 @@
 
     window.addEventListener('load', (event) => {
         document.getElementById('ownerIDSearch').addEventListener('click', (event) => {
-            tableElem.innerHTML = ``;
+
             const xhr = new XMLHttpRequest();
             xhr.open('GET', `http://localhost:8080/findPetsFromOwner/${document.getElementById('ownerID').value}`, true);
             xhr.send();
@@ -110,9 +115,15 @@
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
                         const results = JSON.parse(xhr.responseText);
-                        //const results = xhr.responseText;
 
-                        //alert('found!!');
+
+                        if (xhr.responseText.length === 2) {
+                            alert("No results")
+                            return;
+                        }
+
+                        tableElem.innerHTML = ``;
+
                         tableElem.style.display = "block";
                         tableElem.style.alignItems = "center";
                         tableElem.innerHTML +=
@@ -133,7 +144,6 @@
                                 "<td >" + `${element.ownerID}` + "</td>"
                                 + "</tr>";
                         });
-                        //} else alert('No results! Please try again!!');
                     }
                 }
             };

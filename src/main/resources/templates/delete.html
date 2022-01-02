@@ -2,68 +2,132 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <title>delete</title>
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-  <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>delete a user</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
+    <style>
+        table,
+        th,
+        td {
+            align-items: center;
+            border: 2px solid rgb(255, 255, 255);
+            text-align: center;
+            border-collapse: collapse;
+        }
+    </style>
 </head>
+
+<!--This is the redirect page to delete a User from the Admin's page.-->
+
 <body>
 <div class="container">
-  <form class="form-signin">
-    <h2 class="form-signin-heading">Enter the User's ID to delete his account</h2>
+    <form class="form-signin">
+        <h2 class="form-signin-heading">Enter the User's ID to delete his account</h2>
 
-    <p>
-      <label for="id_number" class="sr-only">ID Number</label>
-      <input type="password" id="id_number" name="ID Number" class="form-control" placeholder="Id Number"
-             required>
-    </p>
+        <p>
+            <label for="id_number" class="sr-only">ID Number</label>
+            <input type="password" id="id_number" name="ID Number" class="form-control" placeholder="Id Number"
+                   required>
+        </p>
 
-    <button class="btn btn-lg btn-primary btn-block" id="sendRequest" type="submit">Delete</button>
-  </form>
+        <button class="btn btn-lg btn-primary btn-block" id="sendRequest" type="submit">Delete</button>
+    </form>
 
 
-  <form class="form-signin" method="get" action="/admin">
-    <button class="btn btn-lg btn-secondary btn-block" type="submit">Back</button>
-  </form>
+    <form class="form-signin" method="get" action="/admin">
+        <button class="btn btn-lg btn-secondary btn-block" type="submit">Back</button>
+    </form>
+
+    <button class="btn btn-lg btn-secondary btn-block" id="listAll" type="submit">List all users</button>
+
+    <br>
+    <table id="table" class="form-control" style="width: fit-content; margin-left:auto;margin-right:auto;"></table>
+    <br>
+
 </div>
-
 </body>
+
 </html>
 
 <script>
 
+    /*
+    This function is responsible for sending a POST request on our app to delete a certain user. The admin
+    needs to enter a correct User ID
+     */
+    window.addEventListener('load', (event) => {
+        document.getElementById('sendRequest').addEventListener('click', (event) => {
 
-  window.addEventListener('load', (event) => {
-    document.getElementById('sendRequest').addEventListener('click', (event) => {
+            const user = {
+                'idNumber': document.getElementById('id_number').value,
+                'password': null,
+                'active': null,
+                'role': null,
+                'username': null
+            };
 
-      const user = {
-        'idNumber': document.getElementById('id_number').value,
-        'password': null,
-        'active': null,
-        'role': null,
-        'username': null
-
-
-      };
-
-
-      const xhr = new XMLHttpRequest();
-      xhr.open('POST', 'http://localhost:8080/users/delete', true);
-      xhr.setRequestHeader('Content-type', 'application/json');
-      xhr.send(JSON.stringify(user));
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-          if (xhr.status === 200) {
-            alert("registered!");
-          }
-        }
-      };
-
+            const xhr = new XMLHttpRequest();
+            xhr.open('DELETE', 'http://localhost:8080/users/delete', true);
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.send(JSON.stringify(user));
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        //If the query can't be completed, then alert the admin
+                        if (xhr.responseText !== "OK") {
+                            alert(xhr.responseText);
+                        } else {
+                            alert("Deleted!");
+                        }
+                    }
+                }
+            };
+        });
     });
-  });
+
+    //In this function we do a get request and get the credentials of all the users in the database.
+    const tableElem = document.getElementById('table');
+    tableElem.style.display = "none";
+
+    //SEARCH PETS
+    window.addEventListener('load', (event) => {
+        document.getElementById('listAll').addEventListener('click', (event) => {
+            tableElem.innerHTML = ``;
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', `http://localhost:8080/users/list`, true);
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        const results = JSON.parse(xhr.responseText);
+                        //const results = xhr.responseText;
+
+                        //alert('found!!');
+                        tableElem.style.display = "block";
+                        tableElem.style.alignItems = "center";
+                        tableElem.innerHTML +=
+                            "<tr>" +
+                            "<th>ID Number</th>" +
+                            "<th>Role</th>" +
+                            "<th>Username</th>" +
+                            "</tr>";
+
+                        results.forEach((element) => {
+                            tableElem.innerHTML += "<tr>" +
+                                "<td >" + `${element.idNumber}` + "</td>" +
+                                "<td >" + `${element.role}` + "</td>" +
+                                "<td >" + `${element.username}` + "</td>" +
+                                "</tr>";
+                        });
+                    }
+                }
+            };
+        });
+    });
 
 </script>

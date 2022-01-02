@@ -4,21 +4,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Ζώα Συντροφιάς</title>
+    <title>Pets</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
 </head>
-<body>
-<h1>Citizen Page</h1>
 
+<body>
 <div class="container">
+    <h1>Citizen Page</h1>
+    <!--Citizen's Options after he logs in-->
+
     <form class="form-signin" method="get" action="/newpet">
         <button class="btn btn-lg btn-primary btn-block" type="submit">Add a new pet</button>
     </form>
-    <form class="form-signin" method="get" action="/pets/list">
-        <button class="btn btn-lg btn-primary btn-block" type="submit">List all pets</button>
-    </form>
+
+    <br>
+
+    <p>
+        <label for="ownerID" class="sr-only"></label>
+        <input type="text" id="ownerID" class="form-control" placeholder="ID Number">
+    </p>
+    <button class="btn btn-lg btn-primary btn-block" id="ownerIDSearch" type="submit">My pets</button>
+
+    <br>
+    <table id="table" class="form-control" style="width: fit-content; margin-left:auto;margin-right:auto;"></table>
+
 </div>
 </body>
+
 </html>
+
+<script>
+    /*
+    In this function, we first hide the table, then do a GET request, we receive a JSON containing an array
+    of Pets. If it is empty, then we display an error message
+     */
+
+    const tableElem = document.getElementById('table');
+    tableElem.style.display = "none";
+
+
+    window.addEventListener('load', (event) => {
+        document.getElementById('ownerIDSearch').addEventListener('click', (event) => {
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', `http://localhost:8080/findPetsFromOwner/${document.getElementById('ownerID').value}`, true);
+            xhr.send(); //send the GET request
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        const results = JSON.parse(xhr.responseText);
+
+                        //If it is empty, then we abort and show a message
+                        if (Object.keys(results).length === 0) {
+                            alert("Owner has no IDs");
+                            return;
+                        }
+
+                        //Otherwise we show the table and for each of the JSON elements we populate it.
+                        tableElem.innerHTML = ``;
+                        tableElem.style.display = "block";
+                        tableElem.style.alignItems = "center";
+
+                        tableElem.innerHTML +=
+                            "<tr>" +
+                            "<th>Serial Number</th>" +
+                            "<th>Race</th>" +
+                            "<th>Genre</th>" +
+                            "<th>Birthdate</th>" +
+                            "<th>Owner ID</th>" +
+                            "</tr>";
+                        results.forEach((element) => {
+
+                            tableElem.innerHTML += "<tr>" +
+                                "<td >" + `${element.serialNumber}` + "</td>" +
+                                "<td >" + `${element.race}` + "</td>" +
+                                "<td >" + `${element.sex}` + "</td>" +
+                                "<td >" + `${element.birthday}` + "</td>" +
+                                "<td >" + `${element.ownerID}` + "</td>"
+                                + "</tr>";
+                        });
+                    }
+                }
+            };
+        });
+    });
+</script>

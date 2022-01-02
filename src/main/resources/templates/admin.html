@@ -1,17 +1,19 @@
-
-<html lang="en"><head>
+<html lang="en">
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Ζώα Συντροφιάς</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <title>Pets</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
 </head>
 <body>
-<h1>Admin Page</h1>
 
 <div class="container">
+    <h1>Admin Page</h1>
+    <!--Admin's options after he logs in-->
     <form class="form-signin" method="get" action="/register">
         <button class="btn btn-lg btn-primary btn-block" type="submit">Register a User</button>
     </form>
@@ -21,10 +23,6 @@
     <form class="form-signin" method="get" action="/delete">
         <button class="btn btn-lg btn-primary btn-block" type="submit">Delete a User</button>
     </form>
-    <form class="form-signin" method="get" action="/users/list">
-        <button class="btn btn-lg btn-primary btn-block" type="submit">List all users</button>
-    </form>
-    <h4>TODO, put the list users to show a table in all the submenus, so the admin can see user creds even in there.</h4>
 </div>
 </body>
 </html>

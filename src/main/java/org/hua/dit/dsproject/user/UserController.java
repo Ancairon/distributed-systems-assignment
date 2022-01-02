@@ -33,9 +33,16 @@ public class UserController {
         userDetailsService.newUser(user);
     }
 
-    @PostMapping(path = "/users/delete")
-    public void deleteUser(@RequestBody User user) {
+    @DeleteMapping(path = "/users/delete")
+    @ResponseBody
+    public String deleteUser(@RequestBody User user) {
+        int response = userDetailsService.userRepository.UserExists(user.getIdNumber());
+        if (response==0){
+            return "This ID doesn't exist";
+        }
+
         userDetailsService.userRepository.deleteById(user.getIdNumber());
+        return "OK!";
     }
 
     @GetMapping(path = "/findPetsFromOwner/{ownerID}")

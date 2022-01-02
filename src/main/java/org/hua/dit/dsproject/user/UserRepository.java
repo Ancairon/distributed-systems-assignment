@@ -16,4 +16,7 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     @Query(value = "select n from PET n where n.ownerID= :id")
     List<Pet> findPets(@Param("id") String ownerID);
+
+    @Query(value = "select count(n) from User n where n.idNumber= :id")
+    int UserExists(@Param("id") String ownerID);
 }
