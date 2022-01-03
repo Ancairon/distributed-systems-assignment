@@ -44,7 +44,6 @@
     const tableElem = document.getElementById('table');
     tableElem.style.display = "none";
 
-
     window.addEventListener('load', (event) => {
         document.getElementById('ownerIDSearch').addEventListener('click', (event) => {
 
@@ -75,8 +74,8 @@
                             "<th>Birthdate</th>" +
                             "<th>Owner ID</th>" +
                             "</tr>";
-                        results.forEach((element) => {
 
+                        results.forEach((element) => {
                             tableElem.innerHTML += "<tr>" +
                                 "<td >" + `${element.serialNumber}` + "</td>" +
                                 "<td >" + `${element.race}` + "</td>" +

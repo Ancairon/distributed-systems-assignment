@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Enter the User's ID and then the new credentials</title>
+    <title>Pets</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
@@ -60,15 +60,18 @@
     <br>
 
 </div>
-
 </body>
 </html>
 
 <script>
 
-
+    //Function responsible for modifying a user
     window.addEventListener('load', (event) => {
         document.getElementById('sendRequest').addEventListener('click', (event) => {
+            /*
+                If we fix the issue with the xhr requests canceling themselves, we can add a check on the response
+                as we do on other functions, for now it would just be eye candy.
+            */
 
             const user = {
                 'idNumber': document.getElementById('id_number').value,
@@ -76,10 +79,7 @@
                 'active': true,
                 'role': document.getElementById('role').value,
                 'username': document.getElementById('username').value
-
-
             };
-
 
             const xhr = new XMLHttpRequest();
             xhr.open('POST', 'http://localhost:8080/users/modify', true);
@@ -96,12 +96,10 @@
         });
     });
 
-    //  [{"idNumber": "AMa0aaa92093", "password": "pass", "active": true, "role": "ROLE_ADMIN", "username": "admin"}]
-
     const tableElem = document.getElementById('table');
     tableElem.style.display = "none";
 
-    //SEARCH PETS
+    //List all Users
     window.addEventListener('load', (event) => {
         document.getElementById('listAll').addEventListener('click', (event) => {
             tableElem.innerHTML = ``;
@@ -112,9 +110,7 @@
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
                         const results = JSON.parse(xhr.responseText);
-                        //const results = xhr.responseText;
 
-                        //alert('found!!');
                         tableElem.style.display = "block";
                         tableElem.style.alignItems = "center";
                         tableElem.innerHTML +=

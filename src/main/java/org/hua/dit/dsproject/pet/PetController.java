@@ -21,9 +21,8 @@ public class PetController {
         return petService.listAllPets();
     }
 
-
-
     @PostMapping(path = "/pets/new")
+    //We need to add a check for the owner's ID here, to check that it exists
     public void newPet(@RequestBody Pet pet) {
         petService.newPet(pet);
     }
@@ -38,7 +37,6 @@ public class PetController {
     public Optional<Pet> getPet(@PathVariable("serialNumber") int serialNumber) {
         return petService.findPet(serialNumber);
     }
-
 
     @DeleteMapping(path = "/pets/delete/{serialNumber}")
     public void deletePet(@PathVariable("serialNumber") int serialNumber) {

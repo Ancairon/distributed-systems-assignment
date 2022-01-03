@@ -15,7 +15,6 @@ import java.io.IOException;
 public class TemplateController {
     //Here we map each of the locations of the site, to their corresponding html file.
 
-
     @GetMapping(path = "modifyPet")
     public String getmodifyView() {
         return "modifyPet";
@@ -36,12 +35,10 @@ public class TemplateController {
         return "citizen";
     }
 
-
     @GetMapping("employee")
     public String getEmployeeView() {
         return "employee";
     }
-
 
     @GetMapping("admin")
     public String getAdminView() {

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Please sign in</title>
+    <title>Pets</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
@@ -28,7 +28,7 @@
         </p>
         <p>
             <label for="sex" class="sr-only">Genre</label>
-            <input type="text" id="sex" class="form-control" placeholder="Genre" required>
+            <input type="text" id="sex" class="form-control" placeholder="M/F" required>
         </p>
         <p>
             <label for="birthday" class="sr-only">Birthday</label>
@@ -55,30 +55,34 @@
 
 <script>
 
-
+    //Function to add a new pet, sends a POST request of a Pet object.
     window.addEventListener('load', (event) => {
         document.getElementById('sendRequest').addEventListener('click', (event) => {
 
-            const pet = {
-                'serialNumber': document.getElementById('serialNumber').value,
-                'race': document.getElementById('race').value,
-                'sex': document.getElementById('sex').value,
-                'birthday': document.getElementById('birthday').value,
-                'ownerID': document.getElementById('ownerID').value
-            };
+            if (document.getElementById('sex').value.length === 1 && (document.getElementById('sex').value === 'M' || document.getElementById('sex').value === 'F')) {
 
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', 'http://localhost:8080/pets/new', true);
-            xhr.setRequestHeader('Content-type', 'application/json');
-            xhr.send(JSON.stringify(pet));
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        alert("registered!");
+                const pet = {
+                    'serialNumber': document.getElementById('serialNumber').value,
+                    'race': document.getElementById('race').value,
+                    'sex': document.getElementById('sex').value,
+                    'birthday': document.getElementById('birthday').value,
+                    'ownerID': document.getElementById('ownerID').value
+                };
+
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', 'http://localhost:8080/pets/new', true);
+                xhr.setRequestHeader('Content-type', 'application/json');
+                xhr.send(JSON.stringify(pet));
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            alert("registered!");
+                        }
                     }
-                }
-            };
-
+                };
+            } else {
+                alert('Please give a single character on the pet\'s Genre (M/F)');
+            }
         });
     });
 
