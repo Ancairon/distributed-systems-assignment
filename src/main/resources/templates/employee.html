@@ -1,1 +1,152 @@
-<h1>this is the employee anding page</h1>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Ζώα Συντροφιάς</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+
+    <style>
+        table,
+        th,
+        td {
+            align-items: center;
+            border: 2px solid rgb(255, 255, 255);
+            text-align: center;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="container">
+    <h1>Employee Page</h1>
+    <!--Employee's options after he logs in-->
+
+    <p>
+        <label for="serialNumber" class="sr-only"></label>
+        <input type="text" id="serialNumber" class="form-control" placeholder="Serial Number"
+        >
+    </p>
+
+    <button class="btn btn-lg btn-primary btn-block" id="serialIDSearch" type="submit">Search By Pet's serial ID
+    </button>
+
+    <br>
+    <br>
+
+    <p>
+        <label for="ownerID" class="sr-only"></label>
+        <input type="text" id="ownerID" class="form-control" placeholder="Serial Number"
+        >
+    </p>
+
+
+    <button class="btn btn-lg btn-primary btn-block" id="ownerIDSearch" type="submit">Search By Owner ID</button>
+
+    <br>
+    <table id="table" class="form-control" style="width: fit-content; margin-left:auto;margin-right:auto;"></table>
+
+</div>
+</body>
+</html>
+
+<script type="text/javascript">
+
+    const tableElem = document.getElementById('table');
+    tableElem.style.display = "none";
+
+    //SEARCH PETS
+    window.addEventListener('load', (event) => {
+        document.getElementById('serialIDSearch').addEventListener('click', (event) => {
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', `http://localhost:8080/findPet/${document.getElementById('serialNumber').value}`, true);
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        const results = JSON.parse(xhr.responseText);
+
+                        if (xhr.responseText.length === 4) {
+                            alert("No results")
+                            return;
+                        }
+
+                        tableElem.innerHTML = ``;
+
+                        tableElem.style.display = "block";
+                        tableElem.style.alignItems = "center";
+                        tableElem.innerHTML +=
+                            "<tr>" +
+                            "<th>Serial Number</th>" +
+                            "<th>Race</th>" +
+                            "<th>Genre</th>" +
+                            "<th>Birthdate</th>" +
+                            "<th>Owner ID</th>" +
+                            "</tr>";
+
+
+                        tableElem.innerHTML += "<tr>" +
+                            "<td >" + `${results.serialNumber}` + "</td>" +
+                            "<td >" + `${results.race}` + "</td>" +
+                            "<td >" + `${results.sex}` + "</td>" +
+                            "<td >" + `${results.birthday}` + "</td>" +
+                            "<td >" + `${results.ownerID}` + "</td>"
+                            + "</tr>";
+                    }
+                }
+            };
+        });
+    });
+
+
+    window.addEventListener('load', (event) => {
+        document.getElementById('ownerIDSearch').addEventListener('click', (event) => {
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', `http://localhost:8080/findPetsFromOwner/${document.getElementById('ownerID').value}`, true);
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        const results = JSON.parse(xhr.responseText);
+
+
+                        if (xhr.responseText.length === 2) {
+                            alert("No results")
+                            return;
+                        }
+
+                        tableElem.innerHTML = ``;
+
+                        tableElem.style.display = "block";
+                        tableElem.style.alignItems = "center";
+                        tableElem.innerHTML +=
+                            "<tr>" +
+                            "<th>Serial Number</th>" +
+                            "<th>Race</th>" +
+                            "<th>Genre</th>" +
+                            "<th>Birthdate</th>" +
+                            "<th>Owner ID</th>" +
+                            "</tr>";
+
+                        results.forEach((element) => {
+                            tableElem.innerHTML += "<tr>" +
+                                "<td >" + `${element.serialNumber}` + "</td>" +
+                                "<td >" + `${element.race}` + "</td>" +
+                                "<td >" + `${element.sex}` + "</td>" +
+                                "<td >" + `${element.birthday}` + "</td>" +
+                                "<td >" + `${element.ownerID}` + "</td>"
+                                + "</tr>";
+                        });
+                    }
+                }
+            };
+        });
+    });
+</script>

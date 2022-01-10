@@ -30,6 +30,10 @@ public class PetService {
         petRepository.deleteById(serialNumber);
     }
 
+    public Optional<Pet> findPet(int id){
+        return petRepository.findById(id);
+    }
+
     @Transactional
     public void updatePet(int serialNumber, String race, char sex) {
         Optional<Pet> pet = petRepository.findById(serialNumber);

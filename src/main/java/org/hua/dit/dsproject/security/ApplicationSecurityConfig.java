@@ -38,14 +38,17 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "index", "/css/*", "/js/*").permitAll()
-                .antMatchers("/pets/**").hasRole("CITIZEN")
-                .antMatchers("/pets/**").hasRole("VET")
-                .antMatchers("/pets/**").hasRole("EMPLOYEE")
+                .antMatchers("pets/new","/newpet").hasRole("CITIZEN")
+                .antMatchers("/vet/modifyPet").hasRole("VET")
+                .antMatchers("findPet/{serialNumber}").hasAnyRole("VET", "EMPLOYEE")
+                .antMatchers("/users/**", "/register").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
-                .defaultSuccessUrl("/success", true);
+                .defaultSuccessUrl("/success", true)
+                .loginPage("/login").permitAll()
+        ;
     }
 
     @Override

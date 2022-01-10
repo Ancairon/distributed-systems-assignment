@@ -1,7 +1,6 @@
 package org.hua.dit.dsproject.pet;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Entity(name = "PET")
 @Table
@@ -16,7 +15,7 @@ public class Pet {
     @Column( name = "SEX")
     private char sex;
     @Column( name = "BIRTHDAY")
-    private LocalDate birthday;
+    private String birthday;
     @Column( name = "OWNER_ID")
     private String ownerID;
 
@@ -25,7 +24,7 @@ public class Pet {
 
     }
 
-    public Pet(String labrador_retriever, char m, LocalDate of) {
+    public Pet(String labrador_retriever, char m, String of) {
         this.race = labrador_retriever;
         this.sex = m;
         this.birthday = of;
@@ -48,11 +47,11 @@ public class Pet {
         this.sex = sex;
     }
 
-    public LocalDate getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(LocalDate birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
@@ -64,7 +63,7 @@ public class Pet {
         this.serialNumber = serialNumber;
     }
 
-    public Pet(String race, char sex, LocalDate birthday, String ownerID) {
+    public Pet(String race, char sex, String birthday, String ownerID) {
         this.race = race;
         this.sex = sex;
         this.birthday = birthday;
@@ -81,6 +80,6 @@ public class Pet {
 
     @Override
     public String toString() {
-        return "This pet is a " + (this.sex == 'M' ? "male" : "female") + " " + this.race + " born on " + this.birthday.toString();
+        return "This pet is a " + (this.sex == 'M' ? "male" : "female") + " " + this.race + " born on " + this.birthday;
     }
 }

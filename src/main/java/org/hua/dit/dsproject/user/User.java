@@ -1,4 +1,4 @@
-package org.hua.dit.dsproject.auth;
+package org.hua.dit.dsproject.user;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,7 +7,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "user")
-public class ApplicationUser {
+public class User {
 
     //The class that will be saved on the db as a row of a table
     @Id

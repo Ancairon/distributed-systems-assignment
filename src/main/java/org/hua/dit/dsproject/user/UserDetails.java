@@ -1,17 +1,16 @@
-package org.hua.dit.dsproject.auth;
+package org.hua.dit.dsproject.user;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MyUserDetails implements UserDetails {
+public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
 
-    //User credentials, this will be populated by the ApplicationUser class, coming from the db
+    //User credentials, this will be populated by the User class, coming from the db
     public String idNumber;
     public String userName;
     public String password;
@@ -20,15 +19,15 @@ public class MyUserDetails implements UserDetails {
 
 
     //Constructors
-    public MyUserDetails() {
+    public UserDetails() {
     }
 
-    public MyUserDetails(ApplicationUser applicationUser) {
-        this.idNumber = applicationUser.getIdNumber();
-        this.userName = applicationUser.getUsername();
-        this.password = applicationUser.getPassword();
-        this.active = applicationUser.isActive();
-        this.grantedAuthorities = Arrays.stream(applicationUser.getRole().split(",")).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+    public UserDetails(User user) {
+        this.idNumber = user.getIdNumber();
+        this.userName = user.getUsername();
+        this.password = user.getPassword();
+        this.active = user.isActive();
+        this.grantedAuthorities = Arrays.stream(user.getRole().split(",")).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
 
     }
 

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Pets</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
+    <style>
+        table,
+        th,
+        td {
+            align-items: center;
+            border: 2px solid rgb(255, 255, 255);
+            text-align: center;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <form class="form-signin">
+        <h2 class="form-signin-heading">Enter the User's ID and then the new credentials</h2>
+        <p>
+            <label for="username" class="sr-only">Username</label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="Username" required
+                   autofocus>
+        </p>
+        <p>
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+        </p>
+        <p>
+            <label for="id_number" class="sr-only">ID Number</label>
+            <input type="text" id="id_number" name="ID Number" class="form-control" placeholder="Id Number"
+                   required>
+        </p>
+        <label for="role">Role Request</label>
+        <select name="role" id="role">
+            <option value="ROLE_CITIZEN">Citizen</option>
+            <option value="ROLE_VET">Vet</option>
+            <option value="ROLE_EMPLOYEE">Employee</option>
+        </select>
+        <button class="btn btn-lg btn-primary btn-block" id="sendRequest" type="submit">Modify</button>
+    </form>
+
+
+    <form class="form-signin" method="get" action="/admin">
+        <button class="btn btn-lg btn-secondary btn-block" type="submit">Back</button>
+    </form>
+
+    <button class="btn btn-lg btn-secondary btn-block" id="listAll" type="submit">List all users</button>
+
+    <br>
+    <table id="table" class="form-control" style="width: fit-content; margin-left:auto;margin-right:auto;"></table>
+    <br>
+
+</div>
+</body>
+</html>
+
+<script>
+
+    //Function responsible for modifying a user
+    window.addEventListener('load', (event) => {
+        document.getElementById('sendRequest').addEventListener('click', (event) => {
+            /*
+                If we fix the issue with the xhr requests canceling themselves, we can add a check on the response
+                as we do on other functions, for now it would just be eye candy.
+            */
+
+            const user = {
+                'idNumber': document.getElementById('id_number').value,
+                'password': document.getElementById('password').value,
+                'active': true,
+                'role': document.getElementById('role').value,
+                'username': document.getElementById('username').value
+            };
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://localhost:8080/users/modify', true);
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.send(JSON.stringify(user));
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        alert("removethisalert!");
+                    }
+                }
+            };
+
+        });
+    });
+
+    const tableElem = document.getElementById('table');
+    tableElem.style.display = "none";
+
+    //List all Users
+    window.addEventListener('load', (event) => {
+        document.getElementById('listAll').addEventListener('click', (event) => {
+            tableElem.innerHTML = ``;
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', `http://localhost:8080/users/list`, true);
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        const results = JSON.parse(xhr.responseText);
+
+                        tableElem.style.display = "block";
+                        tableElem.style.alignItems = "center";
+                        tableElem.innerHTML +=
+                            "<tr>" +
+                            "<th>ID Number</th>" +
+                            "<th>Role</th>" +
+                            "<th>Username</th>" +
+                            "</tr>";
+
+                        results.forEach((element) => {
+                            tableElem.innerHTML += "<tr>" +
+                                "<td >" + `${element.idNumber}` + "</td>" +
+                                "<td >" + `${element.role}` + "</td>" +
+                                "<td >" + `${element.username}` + "</td>" +
+                                "</tr>";
+                        });
+                    }
+                }
+            };
+        });
+    });
+
+</script>
