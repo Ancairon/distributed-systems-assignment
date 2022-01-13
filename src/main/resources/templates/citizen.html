@@ -30,6 +30,10 @@
     <br>
     <table id="table" class="form-control" style="width: fit-content; margin-left:auto;margin-right:auto;"></table>
 
+    <form class="form-signin" method="get" action="/logout">
+        <button class="btn btn-lg btn-secondary btn-block" type="submit">Logout</button>
+    </form>
+
 </div>
 </body>
 
@@ -61,7 +65,7 @@
                             return;
                         }
 
-                        //Otherwise we show the table and for each of the JSON elements we populate it.
+                        //Otherwise, we show the table and for each of the JSON elements we populate it.
                         tableElem.innerHTML = ``;
                         tableElem.style.display = "block";
                         tableElem.style.alignItems = "center";

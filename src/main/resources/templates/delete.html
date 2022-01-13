@@ -31,7 +31,7 @@
 
         <p>
             <label for="id_number" class="sr-only">ID Number</label>
-            <input type="password" id="id_number" name="ID Number" class="form-control" placeholder="Id Number"
+            <input type="text" id="id_number" name="ID Number" class="form-control" placeholder="Id Number"
                    required>
         </p>
 
@@ -48,6 +48,10 @@
     <br>
     <table id="table" class="form-control" style="width: fit-content; margin-left:auto;margin-right:auto;"></table>
     <br>
+
+    <form class="form-signin" method="get" action="/logout">
+        <button class="btn btn-lg btn-secondary btn-block" type="submit">Logout</button>
+    </form>
 
 </div>
 </body>
