@@ -1,6 +1,7 @@
 package org.hua.dit.dsproject.pet;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity(name = "PET")
 @Table
@@ -15,7 +16,7 @@ public class Pet {
     @Column( name = "SEX")
     private char sex;
     @Column( name = "BIRTHDAY")
-    private String birthday;
+    private Date birthday;
     @Column( name = "OWNER_ID")
     private String ownerID;
 
@@ -24,12 +25,12 @@ public class Pet {
 
     }
 
-    public Pet(String labrador_retriever, char m, String of) {
-        this.race = labrador_retriever;
-        this.sex = m;
-        this.birthday = of;
+    public Pet(String race, char sex, Date birthday, String ownerID) {
+        this.race = race;
+        this.sex = sex;
+        this.birthday = birthday;
+        this.ownerID = ownerID;
     }
-
 
     public String getRace() {
         return race;
@@ -47,11 +48,11 @@ public class Pet {
         this.sex = sex;
     }
 
-    public String getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 
@@ -63,12 +64,6 @@ public class Pet {
         this.serialNumber = serialNumber;
     }
 
-    public Pet(String race, char sex, String birthday, String ownerID) {
-        this.race = race;
-        this.sex = sex;
-        this.birthday = birthday;
-        this.ownerID = ownerID;
-    }
 
     public String getOwnerID() {
         return ownerID;
