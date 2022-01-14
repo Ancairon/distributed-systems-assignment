@@ -30,8 +30,8 @@
         <h2 class="form-signin-heading">Enter the User's ID to delete his account</h2>
 
         <p>
-            <label for="id_number" class="sr-only">ID Number</label>
-            <input type="text" id="id_number" name="ID Number" class="form-control" placeholder="Id Number"
+            <label for="idNumber" class="sr-only">ID Number</label>
+            <input type="text" id="idNumber" name="ID Number" class="form-control" placeholder="Id Number"
                    required>
         </p>
 
@@ -67,30 +67,30 @@
     window.addEventListener('load', (event) => {
         document.getElementById('sendRequest').addEventListener('click', (event) => {
 
-            const user = {
-                'idNumber': document.getElementById('id_number').value,
-                'password': null,
-                'active': null,
-                'role': null,
-                'username': null
-            };
+            if (document.getElementById('idNumber').value.length > 0) {
 
-            const xhr = new XMLHttpRequest();
-            xhr.open('DELETE', 'http://localhost:8080/users/delete', true);
-            xhr.setRequestHeader('Content-type', 'application/json');
-            xhr.send(JSON.stringify(user));
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        //If the query can't be completed, then alert the admin
-                        if (xhr.responseText !== "OK") {
+                const user = {
+                    'idNumber': document.getElementById('idNumber').value,
+                    'password': null,
+                    'active': null,
+                    'role': null,
+                    'username': null
+                };
+
+                const xhr = new XMLHttpRequest();
+                xhr.open('DELETE', 'http://localhost:8080/users/delete', true);
+                xhr.setRequestHeader('Content-type', 'application/json');
+                xhr.send(JSON.stringify(user));
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
                             alert(xhr.responseText);
-                        } else {
-                            alert("Deleted!");
                         }
                     }
-                }
-            };
+                };
+            } else {
+                alert('Please fill out the fields.')
+            }
         });
     });
 
