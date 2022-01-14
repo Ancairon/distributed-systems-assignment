@@ -18,7 +18,9 @@ mysql -h 127.0.0.1 -u fotis -p
 
 and typing the password you selected.
 
-- After that, you can add the first user (admin is reccomended to be able to add more users from the UI) by:
+- After that, you can add the first user (admin is recommended to be able to add more users from the UI) by:
+
+Then run the application to create the tables and then in the mysql terminal, run:
 
 ```
 use ds_db;
