@@ -26,7 +26,6 @@ public class UserDetails implements org.springframework.security.core.userdetail
         this.idNumber = user.getIdNumber();
         this.userName = user.getUsername();
         this.password = user.getPassword();
-        this.active = user.isActive();
         this.grantedAuthorities = Arrays.stream(user.getRole().split(",")).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
 
     }

@@ -67,7 +67,6 @@
     //SEARCH PETS
     window.addEventListener('load', (event) => {
         document.getElementById('serialIDSearch').addEventListener('click', (event) => {
-
             const xhr = new XMLHttpRequest();
             xhr.open('GET', `http://localhost:8080/findPet/${document.getElementById('serialNumber').value}`, true);
             xhr.send();
@@ -102,7 +101,7 @@
                             "<td >" + `${results.birthday}` + "</td>" +
                             "<td >" + `${results.ownerID}` + "</td>"
                             + "</tr>";
-                    }
+                    } else alert("Use numbers on the serial number please.");
                 }
             };
         });

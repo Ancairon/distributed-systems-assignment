@@ -17,8 +17,8 @@ public class User {
     private String userName;
     @Column(name = "password")
     private String password;
-    @Column(name = "active")
-    private boolean active;
+  //  @Column(name = "active")
+    //private boolean active;
     @Column(name = "role")
     private String role;
 
@@ -46,13 +46,13 @@ public class User {
         this.password = password;
     }
 
-    public boolean isActive() {
-        return active;
-    }
+   // public boolean isActive() {
+    //    return active;
+   // }
 
-    public void setActive(boolean active) {
-        this.active = active;
-    }
+  //  public void setActive(boolean active) {
+    //    this.active = active;
+   // }
 
     public String getRole() {
         return role;

@@ -50,47 +50,52 @@
 
     window.addEventListener('load', (event) => {
         document.getElementById('ownerIDSearch').addEventListener('click', (event) => {
+            if (document.getElementById('ownerID').value.length > 0) {
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', `http://localhost:8080/findPetsFromOwner/${document.getElementById('ownerID').value}`, true);
+                xhr.send(); //send the GET request
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            const results = JSON.parse(xhr.responseText);
 
-            const xhr = new XMLHttpRequest();
-            xhr.open('GET', `http://localhost:8080/findPetsFromOwner/${document.getElementById('ownerID').value}`, true);
-            xhr.send(); //send the GET request
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        const results = JSON.parse(xhr.responseText);
+                            //If it is empty, then we abort and show a message
+                            if (Object.keys(results).length === 0) {
+                                alert("Owner has no IDs");
+                                return;
+                            }
 
-                        //If it is empty, then we abort and show a message
-                        if (Object.keys(results).length === 0) {
-                            alert("Owner has no IDs");
-                            return;
+                            //Otherwise, we show the table and for each of the JSON elements we populate it.
+                            tableElem.innerHTML = ``;
+                            tableElem.style.display = "block";
+                            tableElem.style.alignItems = "center";
+
+                            tableElem.innerHTML +=
+                                "<tr>" +
+                                "<th>Serial Number</th>" +
+                                "<th>Race</th>" +
+                                "<th>Genre</th>" +
+                                "<th>Birthdate</th>" +
+                                "<th>Owner ID</th>" +
+                                "<th>Medical History</th>" +
+                                "</tr>";
+
+                            results.forEach((element) => {
+                                tableElem.innerHTML += "<tr>" +
+                                    "<td >" + `${element.serialNumber}` + "</td>" +
+                                    "<td >" + `${element.race}` + "</td>" +
+                                    "<td >" + `${element.sex}` + "</td>" +
+                                    "<td >" + `${element.birthday}` + "</td>" +
+                                    "<td >" + `${element.ownerID}` + "</td>" +
+                                    "<td >" + `${element.medical_history}` + "</td>" +
+                                    "</tr>";
+                            });
                         }
-
-                        //Otherwise, we show the table and for each of the JSON elements we populate it.
-                        tableElem.innerHTML = ``;
-                        tableElem.style.display = "block";
-                        tableElem.style.alignItems = "center";
-
-                        tableElem.innerHTML +=
-                            "<tr>" +
-                            "<th>Serial Number</th>" +
-                            "<th>Race</th>" +
-                            "<th>Genre</th>" +
-                            "<th>Birthdate</th>" +
-                            "<th>Owner ID</th>" +
-                            "</tr>";
-
-                        results.forEach((element) => {
-                            tableElem.innerHTML += "<tr>" +
-                                "<td >" + `${element.serialNumber}` + "</td>" +
-                                "<td >" + `${element.race}` + "</td>" +
-                                "<td >" + `${element.sex}` + "</td>" +
-                                "<td >" + `${element.birthday}` + "</td>" +
-                                "<td >" + `${element.ownerID}` + "</td>"
-                                + "</tr>";
-                        });
                     }
-                }
-            };
+                };
+            } else {
+                alert("Please fill in the field.")
+            }
         });
     });
 </script>

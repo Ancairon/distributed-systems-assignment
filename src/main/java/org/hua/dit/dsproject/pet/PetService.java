@@ -11,7 +11,8 @@ import java.util.Optional;
 @Service
 public class PetService {
 
-    private final PetRepository petRepository;
+    @Autowired
+    PetRepository petRepository;
 
     @Autowired
     public PetService(PetRepository petRepository) {
@@ -30,17 +31,19 @@ public class PetService {
         petRepository.deleteById(serialNumber);
     }
 
-    public Optional<Pet> findPet(int id){
+    public Optional<Pet> findPet(int id) {
         return petRepository.findById(id);
     }
 
-    @Transactional
-    public void updatePet(int serialNumber, String race, char sex) {
+
+    public void updatePet(int serialNumber, String medical_history) {
         Optional<Pet> pet = petRepository.findById(serialNumber);
         if (pet.isPresent()) {
             Pet thePet = pet.get();
-            thePet.setRace(race);
-            thePet.setSex(sex);
+
+            thePet.setMedical_history(medical_history);
+            deletePet(serialNumber);
+            newPet(thePet);
         }
 
     }

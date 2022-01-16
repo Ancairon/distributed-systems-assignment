@@ -25,7 +25,7 @@ Then run the application to create the tables and then in the mysql terminal, ru
 ```
 use ds_db;
 
-insert into user values ('1',1,'pass','ROLE_ADMIN','admin');
+insert into user values ('1','pass','ROLE_ADMIN','admin');
 ```
 
 After this you can continue on the login page: `http://localhost:8080/login`

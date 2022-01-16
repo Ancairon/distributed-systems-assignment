@@ -19,17 +19,21 @@ public class Pet {
     private Date birthday;
     @Column( name = "OWNER_ID")
     private String ownerID;
+    @Column( name = "MEDICAL_HISTORY")
+    private String medical_history;
 
 
     public Pet() {
 
     }
 
-    public Pet(String race, char sex, Date birthday, String ownerID) {
+    public Pet(int serialNumber, String race, char sex, Date birthday, String ownerID, String medical_history) {
+        this.serialNumber = serialNumber;
         this.race = race;
         this.sex = sex;
         this.birthday = birthday;
         this.ownerID = ownerID;
+        this.medical_history = medical_history;
     }
 
     public String getRace() {
@@ -73,8 +77,11 @@ public class Pet {
         this.ownerID = ownerID;
     }
 
-    @Override
-    public String toString() {
-        return "This pet is a " + (this.sex == 'M' ? "male" : "female") + " " + this.race + " born on " + this.birthday;
+    public String getMedical_history() {
+        return medical_history;
+    }
+
+    public void setMedical_history(String medical_history) {
+        this.medical_history = medical_history;
     }
 }
