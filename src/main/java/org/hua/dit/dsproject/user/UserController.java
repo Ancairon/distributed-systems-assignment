@@ -28,9 +28,18 @@ public class UserController {
     }
 
     @PostMapping(path = "/users/modify")
-    public void modifyUser(@RequestBody User user) {
+    @ResponseBody
+    public String modifyUser(@RequestBody User user) {
+
+        int response = userDetailsService.userRepository.UserExists(user.getIdNumber());
+        if (response==0){
+            return "This ID doesn't exist";
+        }
+
         userDetailsService.userRepository.deleteById(user.getIdNumber());
         userDetailsService.newUser(user);
+
+        return "Modified!";
     }
 
     @DeleteMapping(path = "/users/delete")
@@ -42,7 +51,7 @@ public class UserController {
         }
 
         userDetailsService.userRepository.deleteById(user.getIdNumber());
-        return "OK!";
+        return "Deleted!";
     }
 
     @GetMapping(path = "/findPetsFromOwner/{ownerID}")
