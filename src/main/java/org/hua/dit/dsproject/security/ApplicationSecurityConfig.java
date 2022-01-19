@@ -38,7 +38,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "index", "/css/*", "/js/*").permitAll()
-                .antMatchers("pets/new","/newpet").hasRole("CITIZEN")
+                .antMatchers("pets/new", "/newpet").hasRole("CITIZEN")
                 .antMatchers("/vet/modifyPet").hasRole("VET")
                 .antMatchers("findPet/{serialNumber}").hasAnyRole("VET", "EMPLOYEE")
                 .antMatchers("/users/**", "/register").hasRole("ADMIN")
@@ -47,7 +47,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .defaultSuccessUrl("/success", true)
-                //.loginPage("/login").permitAll()
+        //.loginPage("/login").permitAll()
         ;
     }
 

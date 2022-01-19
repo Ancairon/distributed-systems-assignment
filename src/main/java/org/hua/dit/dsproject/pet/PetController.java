@@ -28,9 +28,16 @@ public class PetController {
     }
 
     @PostMapping(path = "/vet/modify")
-    public void modifyPet(@RequestBody Pet pet) {
-        petService.deletePet(pet.getSerialNumber());
-        petService.newPet(pet);
+    @ResponseBody
+    public String modifyPet(@RequestBody Pet pet) {
+
+        int response = petService.petRepository.PetExists(pet.getSerialNumber());
+        if (response==0){
+            return "No pets found with that serial number.";
+        }
+
+        petService.updatePet(pet.getSerialNumber(), pet.getMedical_history());
+        return "Updated!";
     }
 
     @GetMapping(path = "/findPet/{serialNumber}")
