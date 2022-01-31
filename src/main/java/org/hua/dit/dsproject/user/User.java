@@ -50,7 +50,19 @@ public class User {
     //    return active;
    // }
 
-  //  public void setActive(boolean active) {
+
+    public User() {
+    }
+
+    public User(String idNumber, String userName, String password, String role) {
+        this.idNumber = idNumber;
+        this.userName = userName;
+        this.password = password;
+        this.role = role;
+    }
+
+
+    //  public void setActive(boolean active) {
     //    this.active = active;
    // }
 

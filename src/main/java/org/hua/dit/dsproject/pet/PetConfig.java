@@ -4,21 +4,18 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.time.LocalDate;
+import java.sql.Date;
 import java.util.List;
 
 @Configuration
 public class PetConfig {
-/*
+
     @Bean
     CommandLineRunner commandLineRunner(PetRepository petRepository) {
         return args -> {
-            Pet mydog = new Pet("Labrador Retriever", 'M', LocalDate.of(2010, 9, 8), "ABC123");
+            Pet mydog = new Pet(1, "Sample Race", 'M', new Date(2022, 1, 1), "1");
 
             petRepository.saveAll(List.of(mydog));
         };
-
     }
-    [{"serialNumber":1234,"race":"some race","sex":"F","birthday":"2012-12-12","ownerID":"AM092093"}]
- */
 }
