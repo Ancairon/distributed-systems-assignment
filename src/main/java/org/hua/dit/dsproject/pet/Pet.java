@@ -27,13 +27,13 @@ public class Pet {
 
     }
 
-    public Pet(int serialNumber, String race, char sex, Date birthday, String ownerID, String medical_history) {
+    public Pet(int serialNumber, String race, char sex, Date birthday, String ownerID) {
         this.serialNumber = serialNumber;
         this.race = race;
         this.sex = sex;
         this.birthday = birthday;
         this.ownerID = ownerID;
-        this.medical_history = medical_history;
+        this.medical_history = "empty";
     }
 
     public String getRace() {
