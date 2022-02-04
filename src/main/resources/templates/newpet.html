@@ -10,43 +10,99 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
+
+    <style>
+        table,
+        th,
+        td {
+            position: center;
+            align-items: center;
+            border: 10px solid #1c1c1e;
+            text-align: left;
+            border-collapse: collapse;
+            width: fit-content;
+            background-color: #1c1c1e;
+            border-radius: 5px;
+            margin: 5px;
+        }
+
+        body {
+            align-items: center;
+            font-family: 'Arial', Times, serif;
+            background-color: #2f3136;
+            font-weight: bolder;
+            text-align: center;
+            color: white;
+            margin: auto;
+        }
+
+        button, option {
+            height: 40px;
+            width: 400px;
+            text-align: center;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            border: 0;
+            color: white;
+            font-weight: bolder
+        }
+
+        h2 {
+            font-weight: bolder;
+        }
+
+        form, div, body {
+
+            width: 400px;
+            text-align: center;
+            margin-bottom: 5px;
+
+
+        }
+    </style>
+
 </head>
 <body>
-<div class="container">
-    <form class="form-signin">
-        <h2 class="form-signin-heading">Please enter the pet's credentials</h2>
+<div>
+    <form>
+        <h2>Please enter the pet's credentials</h2>
         <p>
             <label for="serialNumber" class="sr-only">Serial Number</label>
-            <input type="text" id="serialNumber" class="form-control" placeholder="Serial Number"
+            <input style="background-color: #1c1c1e; color: white" type="text" id="serialNumber" class="form-control"
+                   placeholder="Serial Number"
                    required
                    autofocus>
         </p>
         <p>
             <label for="race" class="sr-only">Race</label>
-            <input type="text" id="race" class="form-control" placeholder="Race" required
+            <input style="background-color: #1c1c1e; color: white" type="text" id="race" class="form-control"
+                   placeholder="Race" required
                    autofocus>
         </p>
         <p>
             <label for="sex" class="sr-only">Genre</label>
-            <input type="text" id="sex" class="form-control" placeholder="M/F" required>
+            <input style="background-color: #1c1c1e; color: white" type="text" id="sex" class="form-control"
+                   placeholder="M/F" required>
         </p>
         <p>
             <label for="birthday" class="sr-only">Birthday</label>
-            <input type="date" id="birthday" class="form-control" placeholder="Birthday"
+            <input style="background-color: #1c1c1e; color: white" type="date" id="birthday" class="form-control"
+                   placeholder="Birthday"
                    required>
         </p>
         <p>
             <label for="ownerID" class="sr-only">Owner ID</label>
-            <input type="text" id="ownerID" class="form-control" placeholder="Owner ID"
+            <input style="background-color: #1c1c1e; color: white" type="text" id="ownerID" class="form-control"
+                   placeholder="Owner ID"
                    required>
         </p>
 
-        <button class="btn btn-lg btn-primary btn-block" id="sendRequest" type="submit">Add Pet</button>
+        <button style=" background-color: #43b581;" class="button" id="sendRequest" type="submit">Add Pet</button>
     </form>
 
 
-    <form class="form-signin" method="get" action="/citizen">
-        <button class="btn btn-lg btn-secondary btn-block" type="submit">Back</button>
+    <form class="form" method="get" action="/citizen">
+        <button style=" background-color: #99aab5;" class="button" type="submit">Back</button>
     </form>
 </div>
 
@@ -66,7 +122,8 @@
                     'race': document.getElementById('race').value,
                     'sex': document.getElementById('sex').value,
                     'birthday': document.getElementById('birthday').value,
-                    'ownerID': document.getElementById('ownerID').value
+                    'ownerID': document.getElementById('ownerID').value,
+                    'medical_history': "empty"
                 };
 
                 const xhr = new XMLHttpRequest();

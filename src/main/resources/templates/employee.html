@@ -13,27 +13,66 @@
         table,
         th,
         td {
+            position: center;
             align-items: center;
-            border: 2px solid rgb(255, 255, 255);
-            text-align: center;
+            border: 10px solid #1c1c1e;
+            text-align: left;
             border-collapse: collapse;
+            width: fit-content;
+            background-color: #1c1c1e;
+            border-radius: 5px;
+            margin: 5px;
+        }
+
+        body {
+            align-items: center;
+            font-family: 'Arial', Times, serif;
+            background-color: #2f3136;
+            font-weight: bolder;
+            text-align: center;
+            color: white;
+            margin: auto;
+        }
+
+        button, option {
+            height: 40px;
+            width: 400px;
+            text-align: center;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            border: 0;
+            color: white;
+            font-weight: bolder
+        }
+
+        h2 {
+            font-weight: bolder;
+        }
+
+        form, div, body {
+
+            width: 400px;
+            text-align: center;
+            margin-bottom: 5px;
+
+
         }
     </style>
 </head>
 <body>
 
-
-<div class="container">
-    <h1>Employee Page</h1>
+<div>
+    <h2>Employee Page</h2>
     <!--Employee's options after he logs in-->
 
     <p>
         <label for="serialNumber" class="sr-only"></label>
-        <input type="text" id="serialNumber" class="form-control" placeholder="Serial Number"
+        <input style="background-color: #1c1c1e; color: white" type="text" id="serialNumber" class="form-control"
+               placeholder="Serial Number"
         >
     </p>
 
-    <button class="btn btn-lg btn-primary btn-block" id="serialIDSearch" type="submit">Search By Pet's serial ID
+    <button style=" background-color: #7289da;" class="button" id="serialIDSearch" type="submit">Search By Pet's serial ID
     </button>
 
     <br>
@@ -41,18 +80,19 @@
 
     <p>
         <label for="ownerID" class="sr-only"></label>
-        <input type="text" id="ownerID" class="form-control" placeholder="Serial Number"
+        <input style="background-color: #1c1c1e; color: white" type="text" id="ownerID" class="form-control"
+               placeholder="Owner ID"
         >
     </p>
 
 
-    <button class="btn btn-lg btn-primary btn-block" id="ownerIDSearch" type="submit">Search By Owner ID</button>
+    <button style=" background-color: #7289da;" class="button" id="ownerIDSearch" type="submit">Search By Owner ID</button>
 
     <br>
-    <table id="table" class="form-control" style="width: fit-content; margin-left:auto;margin-right:auto;"></table>
+    <table id="table" class="form"></table>
 
-    <form class="form-signin" method="get" action="/logout">
-        <button class="btn btn-lg btn-secondary btn-block" type="submit">Logout</button>
+    <form class="form" method="get" action="/logout">
+        <button style=" background-color: #99aab5;" class="button" type="submit">Logout</button>
     </form>
 
 </div>

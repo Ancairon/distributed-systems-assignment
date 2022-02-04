@@ -10,14 +10,54 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
+
     <style>
         table,
         th,
         td {
+            position: center;
             align-items: center;
-            border: 2px solid rgb(255, 255, 255);
-            text-align: center;
+            border: 10px solid #1c1c1e;
+            text-align: left;
             border-collapse: collapse;
+            width: fit-content;
+            background-color: #1c1c1e;
+            border-radius: 5px;
+            margin: 5px;
+        }
+
+        body {
+            align-items: center;
+            font-family: 'Arial', Times, serif;
+            background-color: #2f3136;
+            font-weight: bolder;
+            text-align: center;
+            color: white;
+            margin: auto;
+        }
+
+        button,option {
+            height: 40px;
+            width: 400px;
+            text-align: center;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            border: 0;
+            color: white;
+            font-weight: bolder
+        }
+
+        h2 {
+            font-weight: bolder;
+        }
+
+        form, div, body {
+
+            width: 400px;
+            text-align: center;
+            margin-bottom: 5px;
+
+
         }
     </style>
 </head>
@@ -25,29 +65,31 @@
 <!--This is the redirect page to delete a User from the Admin's page.-->
 
 <body>
-<div class="container">
-    <form class="form-signin">
-        <h2 class="form-signin-heading">Enter the User's ID to delete his account</h2>
+<div>
+    <form >
+        <h2 >Enter the User's ID to delete his account</h2>
 
         <p>
             <label for="idNumber" class="sr-only">ID Number</label>
-            <input type="text" id="idNumber" name="ID Number" class="form-control" placeholder="Id Number"
+            <input style="background-color: #1c1c1e; color: white" type="text" id="idNumber" name="ID Number" class="form-control" placeholder="Id Number"
                    required>
         </p>
 
-        <button class="btn btn-lg btn-primary btn-block" id="sendRequest" type="submit">Delete</button>
+        <button style=" background-color: #f04747;" class="button" id="sendRequest" type="submit">Delete</button>
+    </form>
+
+    <button style=" background-color: #7289da;" class="button" id="listAll" type="submit">List all users</button>
+
+
+    <table id="table" class="form"></table>
+    <br>
+
+    <form class="form" method="get" action="/admin">
+        <button style=" background-color: #99aab5;" class="button" type="submit">Back</button>
     </form>
 
 
-    <form class="form-signin" method="get" action="/admin">
-        <button class="btn btn-lg btn-secondary btn-block" type="submit">Back</button>
-    </form>
 
-    <button class="btn btn-lg btn-secondary btn-block" id="listAll" type="submit">List all users</button>
-
-    <br>
-    <table id="table" class="form-control" style="width: fit-content; margin-left:auto;margin-right:auto;"></table>
-    <br>
 
 </div>
 </body>

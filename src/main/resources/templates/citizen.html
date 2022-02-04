@@ -8,30 +8,85 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+
+    <style>
+        table,
+        th,
+        td {
+            position: center;
+            align-items: center;
+            border: 10px solid #1c1c1e;
+            text-align: left;
+            border-collapse: collapse;
+            width: fit-content;
+            background-color: #1c1c1e;
+            border-radius: 5px;
+            margin: 5px;
+        }
+
+        body {
+            align-items: center;
+            font-family: 'Arial', Times, serif;
+            background-color: #2f3136;
+            font-weight: bolder;
+            text-align: center;
+            color: white;
+            margin: auto;
+        }
+
+        button, option {
+            height: 40px;
+            width: 400px;
+            text-align: center;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            border: 0;
+            color: white;
+            font-weight: bolder
+        }
+
+        h2 {
+            font-weight: bolder;
+        }
+
+        form, div, body {
+
+            width: 400px;
+            text-align: center;
+            margin-bottom: 5px;
+
+
+        }
+    </style>
+
 </head>
 
 <body>
-<div class="container">
-    <h1>Citizen Page</h1>
+<div>
+    <h2>Citizen Page</h2>
     <!--Citizen's Options after he logs in-->
 
-    <form class="form-signin" method="get" action="/newpet">
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Add a new pet</button>
+    <form class="form" method="get" action="/newpet">
+        <button style=" background-color: #43b581;" class="button" type="submit">Add a new pet</button>
     </form>
 
     <br>
 
     <p>
-        <label for="ownerID" class="sr-only"></label>
-        <input type="text" id="ownerID" class="form-control" placeholder="ID Number">
+        <label for="ownerID" class="sr-only">ID Number</label>
+        <input style="background-color: #1c1c1e; color: white" type="text" id="ownerID" name="ID Number"
+               class="form-control" placeholder="Id Number"
+               required>
     </p>
-    <button class="btn btn-lg btn-primary btn-block" id="ownerIDSearch" type="submit">My pets</button>
 
+    <button style=" background-color: #7289da;" class="button" id="ownerIDSearch" type="submit">My pets</button>
+
+
+    <table id="table" class="form"></table>
     <br>
-    <table id="table" class="form-control" style="width: fit-content; margin-left:auto;margin-right:auto;"></table>
 
-    <form class="form-signin" method="get" action="/logout">
-        <button class="btn btn-lg btn-secondary btn-block" type="submit">Logout</button>
+    <form class="form" method="get" action="/logout">
+        <button style=" background-color: #99aab5;" class="button" type="submit">Logout</button>
     </form>
 
 </div>
