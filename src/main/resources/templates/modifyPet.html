@@ -96,10 +96,6 @@
 
     window.addEventListener('load', (event) => {
         document.getElementById('sendRequest').addEventListener('click', (event) => {
-            /*
-            If we fix the issue with the xhr requests canceling themselves, we can add a check on the response
-            as we do on other functions, for now it would just be eye candy.
-            */
             const pet = {
                 'serialNumber': document.getElementById('serialNumber').value,
                 'race': null,
